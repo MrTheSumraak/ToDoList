@@ -36,7 +36,6 @@ export const ToDoList = (props: {
     <div className={styles.todoContainer}>
       <ul className={clsx(styles.todoList, styles.failed)}>
         {checkedToDo(false)}
-        {/* <ToDoListItem toDoItem={todo1} /> */}
       </ul>
       <ul className={clsx(styles.todoList, styles.completed)}>
         {checkedToDo(true)}

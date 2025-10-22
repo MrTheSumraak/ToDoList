@@ -30,7 +30,6 @@ export const App = () => {
 
   return (
     <>
-      <Header />
       <Form createNewTodo={createNewTodo} />
       <ToDoList todos={todos} upDateTodo={upDateTodo} deleteTodo={deleteTodo} />
     </>
