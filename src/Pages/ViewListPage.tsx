@@ -1,12 +1,13 @@
 import { nanoid } from 'nanoid';
+import { useSelector } from 'react-redux';
 import { ListItem } from '../components/ListItem/listItem';
-import { ToDo } from '../components/models/toDoItem';
+import { todosSelector } from '../service/listItemSlice';
 
-export const HomePage = (props: { todos: ToDo[] }) => {
-  const zalupd = {};
+export const ViewListPage = () => {
+  const todoSelector = useSelector(todosSelector);
   return (
     <div className='container'>
-      {props.todos.map((todo) => {
+      {todoSelector.map((todo) => {
         {
           return <ListItem todo={todo} key={nanoid(10)} />;
         }

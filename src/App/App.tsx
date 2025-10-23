@@ -1,37 +1,38 @@
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import '../assets/scss/normalize.scss';
 import { Form } from '../components/form/form';
-import { Header } from '../components/Header/header';
 import { ToDo } from '../components/models/toDoItem';
 import { ToDoList } from '../components/TodoList/toDoList';
+import {
+  createAction,
+  deleteAction,
+  todosSelector,
+  upDateAction
+} from '../service/listItemSlice';
 import './App.scss';
 
 export const App = () => {
-  const [todos, setTodos] = useState<ToDo[]>([]);
+  const dispatch = useDispatch();
+  const todoSelector = useSelector(todosSelector);
   const createNewTodo = (text: string) => {
-    const newTodo: ToDo = {
-      id: todos.length,
-      text: text,
-      isDone: false
-    };
-    setTodos([...todos, newTodo]);
+    dispatch(createAction(text));
   };
 
   const upDateTodo = (toDoItem: ToDo) => {
-    const newTodo = todos.map((item) =>
-      item.id === toDoItem.id ? { ...item, isDone: !item.isDone } : item
-    );
-    setTodos(newTodo);
+    dispatch(upDateAction(toDoItem));
   };
   const deleteTodo = (toDoItem: ToDo) => {
-    const newTodos = todos.filter((item) => item.id !== toDoItem.id);
-    setTodos(newTodos);
+    dispatch(deleteAction(toDoItem));
   };
 
   return (
     <>
       <Form createNewTodo={createNewTodo} />
-      <ToDoList todos={todos} upDateTodo={upDateTodo} deleteTodo={deleteTodo} />
+      <ToDoList
+        todos={todoSelector}
+        upDateTodo={upDateTodo}
+        deleteTodo={deleteTodo}
+      />
     </>
   );
 };

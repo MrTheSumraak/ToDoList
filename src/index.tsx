@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 import { route } from './Routing/routing';
+import { store } from './service/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={route} />
+    <Provider store={store}>
+      <RouterProvider router={route} />
+    </Provider>
     {/* <BrowserRouter>
       <Header />
       <Routes>
